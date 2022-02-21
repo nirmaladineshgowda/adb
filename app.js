@@ -31,7 +31,7 @@ app.post('/getQuakesByDegrees', (req, res) => {
     let lon = req.body.lon;
     let N = req.body.N;
 
-    let sqlQuery = `Select * from eq where lattitude >= ${lat - N} and lattitude <= ${lat + N} and longitude >= ${lon - N} and longitude <= ${lon + N}`;
+    let sqlQuery = `Select * from eq where latitude >= ${Number(lat) - Number(N)} and latitude <= ${Number(lat) + Number(N)} and longitude >= ${Number(lon) - Number(N)} and longitude <= ${Number(lon) + Number(N)}`;
     getResult(sqlQuery, res);
 });
 
