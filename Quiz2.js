@@ -1,5 +1,5 @@
-// let baseAddress = 'https://adbquiz2.azurewebsites.net/'; // 'http://localhost:3000/';
-let baseAddress = 'http://localhost:3000/';
+let baseAddress = 'https://adbquiz2.azurewebsites.net/'; // 'http://localhost:3000/';
+//let baseAddress = 'http://localhost:3000/';
 
 function getQuakesByMagRange() {
     let magRange1 = document.getElementById("magRange1").value;
@@ -34,6 +34,29 @@ function displayQuakes(data) {
         div.innerHTML = "Calamity ID: " + data[i].id + "      Magnitude: " + data[i].mag + "     Type:" + data[i].type;
         mainContainer.appendChild(div);
     }
+}
+
+function getQuakesByDegrees() {
+    let lat = document.getElementById("lat").value;
+    let lon = document.getElementById("lon").value;
+    let N = document.getElementById("N").value;
+
+    
+    fetch(`${baseAddress}getQuakesByDegrees`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ lat: lat, lon: lon, N: N }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            displayQuakes(data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
 
 

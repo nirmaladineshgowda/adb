@@ -23,6 +23,18 @@ app.post('/getQuakesByMagRange', (req, res) => {
     getResult(sqlQuery, res);
 });
 
+
+
+// 10
+app.post('/getQuakesByDegrees', (req, res) => {
+    let lat = req.body.lat;
+    let lon = req.body.lon;
+    let N = req.body.N;
+
+    let sqlQuery = `Select * from eq where lattitude >= ${lat - N} and lattitude <= ${lat + N} and longitude >= ${lon - N} and longitude <= ${lon + N}`;
+    getResult(sqlQuery, res);
+});
+
 // 1. Get Larget Earthquakes by magnitude.
 app.post('/getQuakesByTypeAndNet', (req, res) => {
     let type = req.body.type;
