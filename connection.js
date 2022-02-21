@@ -1,36 +1,21 @@
 const { Connection, Request } = require("tedious");
 
 // Create connection to database
-// const config = {
-//   authentication: {
-//     options: {
-//       userName: "manoj619",
-//       password: "Manoj123"
-//     },
-//     type: "default"
-//   },
-//   server: "adbassignmentdemo.database.windows.net",
-//   options: {
-//     database: "adbassignment",
-//     encrypt: true
-//   }
-// };
-
-// Create connection to database
 const config = {
   authentication: {
     options: {
-      userName: "sqluser",
-      password: "Xmzz8b8tyFDR$Rg"
+      userName: "Manoj123",
+      password: "Manoj@123"
     },
     type: "default"
   },
-  server: "adb-student.database.windows.net",
+  server: "adb2.database.windows.net",
   options: {
-    database: "Assignment1",
+    database: "adbdemo2",
     encrypt: true
   }
 };
+
 
 const connection = new Connection(config);
 
