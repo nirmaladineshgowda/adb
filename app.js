@@ -19,7 +19,16 @@ app.post('/getQuakesByMagRange', (req, res) => {
     let magRange1 = req.body.magRange1;
     let magRange2 = req.body.magRange2;
 
-    let sqlQuery = `Select * from eq where mag > ${magRange1} and mag < ${magRange2}`;
+    let sqlQuery = `Select * from eq where mag >= ${magRange1} and mag <= ${magRange2}`;
+    getResult(sqlQuery, res);
+});
+
+// 1. Get Larget Earthquakes by magnitude.
+app.post('/getQuakesByTypeAndNet', (req, res) => {
+    let type = req.body.type;
+    let net = req.body.net;
+
+    let sqlQuery = `Select * from eq where type = ${type} and net = ${net}`;
     getResult(sqlQuery, res);
 });
 
