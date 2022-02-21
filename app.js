@@ -80,6 +80,30 @@ app.post('/getQuakesInDateRange', (req, res) => {
     getResult(sqlQuery, res);
 });
 
+
+// 5. Get Quakes within the date range and Magnitude. 
+app.post('/getQuakesInDateRange', (req, res) => {
+    var loc_lat1 = req.body.lat1;
+    var loc_lon1 = req.body.lon1;
+    var loc_lat2 = req.body.lat2;
+    var loc_lon2 = req.body.lon2;
+    var range = req.body.ran;
+    let sqlQuery = `SELECT count(distinct l1.id),count(distinct l2.id) FROM MCP95677.NEWEARTH l1,MCP95677.NEWEARTH l2 where 
+    (6371*acos(cos(radians(${loc_lat1}))* 
+    cos(radians(l1.latitude))* 
+    cos(radians(l1.longitude) - 
+    radians(${loc_lon1}))+ 
+    sin(radians(${loc_lat1}))*
+    sin(radians(l1.latitude)))) < ${range}
+    and (6371*acos(cos(radians(${loc_lat2}))* 
+    cos(radians(l2.latitude))* 
+    cos(radians(l2.longitude) - 
+    radians(${loc_lon2}))+ 
+    sin(radians(${loc_lat2}))*
+    sin(radians(l2.latitude)))) < ${range};`;
+    getResult(sqlQuery, res);
+});
+
 function getResult(sqlQuery, res) {
     const request = new Request(sqlQuery,
         (err, rowCount) => {

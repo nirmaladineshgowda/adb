@@ -123,38 +123,27 @@ function count_mag_disp(data) {
 }
 
 function high_loc1_loc2() {
-  var loc1_lat = document.forms["high_form_loc"]["loc1_lan"].value;
-  var loc1_lon = document.forms["high_form_loc"]["loc1_lon"].value;
-  var loc2_lat = document.forms["high_form_loc"]["loc2_lan"].value;
-  var loc2_lon = document.forms["high_form_loc"]["loc2_lon"].value;
-  var range = document.forms["high_form_loc"]["range_high_loc"].value;
+  var l1_lat = document.getElementById("l1_lat");
+  var l1_lon = document.getElementById("l1_lon");
+  var l2_lat = document.getElementById("l2_lat");
+  var l2_lon = document.getElementById("l2_lon");
+  var l1l2range = document.getElementById("l1l2range");
 
-
-  if (range == "") {
-    alert("Name must be filled out");
-    return false;
-  }
-  else {
-    {
-      ///First location call
-      fetch('/profile/lac_lon_mac_cal', {
-        method: 'POST', // or 'PUT'
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ lat1: loc1_lat, lon1: loc1_lon, lat2: loc2_lat, lon2: loc2_lon, ran: range }),
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Success:', data);
-          high_loc_ran(data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    }
-    return false;
-  }
+  fetch('l1l2max', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ lat1: l1_lat, lon1: l1_lon, lat2: l2_lat, lon2: l2_lon, ran: l1l2range }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      high_loc_ran(data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }
 
 function high_loc_ran(data) {
