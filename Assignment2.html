@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="./Assignment2.js"></script>
+</head>
+
+<body>
+  <div class="content">
+
+    <div>
+      Enter no. Of Quakes <input id="noOfQuakes" /> <button onclick="getEarthQuakesByMagnitude()">Search</button>
+    </div>
+
+    <div>
+      Enter Latitude: <input id="lat" type="text">
+      Enter Longitude: <input id="lon" type="text">
+      Enter Range: <input id="range" type="text">
+      <button onclick="getQuakesByLatLonRange()">Search range</button>
+    </div>
+    <div>
+      Enter From Date: <input id="fromDate" type="date">
+      Enter To Date: <input id="toDate" type="date">
+      Enter mag: <input id="mag" type="text">
+      <button onclick="getQuakesByDateAndRange()">Search by Date</button>
+    </div>
+
+    <div>
+      Enter Number of days: <input id="magnitude" type="text">
+      <button onclick="getQuakesCountByMagnitude()">Search</button>
+    </div>
+
+    <!-- <GIVE LOCATIOIN 1 and LOCATION 2 DETAILS AND RANGE> -->
+    <div class="mb-10">
+      <form name="high_form_loc" action="/assignment"
+        onsubmit="return high_loc1_loc2('loc1_lan','loc1_lon','loc2_lan','loc2_lon','range_high_loc')" method="post">
+        Enter Location 1 Latitude: <input id="loc1_lan" placeholder="Enter Latitude for Location 1" type="text"
+          name="lat_loc1" required>
+        Enter Location 1 Longitude: <input id="loc1_lon" placeholder="Enter Longitude fro Location 2" type="text"
+          name="long_loc1" required></br>
+        Enter Location 2 Latitude: <input id="loc2_lan" placeholder="Enter LatitudeLocation 2" type="text"
+          name="lat_loc2" required>
+        Enter Location 2 Longitude: <input id="loc2_lon" placeholder="Enter Longitude Location 2" type="text"
+          name="long_loc2" required></br>
+        Enter Range: <input id="range_high_loc" placeholder="Enter Range" type="text" name="range_loc" required>
+        <input type="submit" value="Search range">
+      </form>
+    </div>
+    </br>
+    <!-- <GIVES COORDINATES AND RANGE IN KM--GIVES MAX MAG OF EARTHQUAKE > -->
+    <div class="mb-10">
+      <form name="max_mag_lat_lon" action="/assignment"
+        onsubmit="return get_lat_lon_max('lat_max_mag','long_max_mag','range_max_mag')" method="post">
+        Enter Latitude: <input id="lat_max_mag" placeholder="Enter Latitude" type="text" name="lat_inp_max_mag"
+          required>
+        Enter Longitude: <input id="long_max_mag" placeholder="Enter Longitude" type="text" name="long_inp_max_mag"
+          required>
+        Enter Range: <input id="range_max_mag" placeholder="Enter Range" type="text" name="range_name_1" required>
+        <input type="submit" value="Search range">
+      </form>
+    </div>
+
+
+    <table style="width:100%">
+      <td>
+        <div id="content"> </div>
+      </td>
+    </table>
+  </div>
+
+</body>
+
+</html>

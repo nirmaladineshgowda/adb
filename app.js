@@ -16,8 +16,8 @@ app.get('/', (req, res) => {
 // 1. Get Larget Earthquakes by magnitude.
 app.post('/getEarthQuakesByMagnitude', (req, res) => {
     let noOfEarthQuakes = req.body.noOfEarthQuakes;
-    let sqlQuery = `Select Top ${noOfEarthQuakes} * from data where type = 'earthquake' and mag is not null order by mag desc`;
-    getResult(sqlQuery);
+    let sqlQuery = `Select Top ${noOfEarthQuakes} * from all_month where type = 'earthquake' and mag is not null order by mag desc`;
+    getResult(sqlQuery, res);
 });
 
 // 2. Get Quakes within the range
@@ -26,10 +26,10 @@ app.post('/getQuakesInRange', (req, res) => {
     let lon = req.body.lon;
     let range = req.body.range;
     let sqlQuery = `SELECT id,latitude,longitude,MAG,(6371*acos(cos(radians(${lat}))* cos(radians(latitude))* cos(radians(longitude) 
-    - radians(${lon}))+ sin(radians(${lat}))*sin(radians(latitude)))) AS distance FROM data where (6371*acos(cos(radians(${lat}))* 
+    - radians(${lon}))+ sin(radians(${lat}))*sin(radians(latitude)))) AS distance FROM all_month where (6371*acos(cos(radians(${lat}))* 
     cos(radians(latitude))* cos(radians(longitude) - radians(${lon}))+ sin(radians(${lat}))*sin(radians(latitude)))) < ${range}
      order by mag desc;`;
-    getResult(sqlQuery);
+    getResult(sqlQuery, res);
 });
 
 // 3. Get Quakes within the date range and Magnitude. 
@@ -37,15 +37,24 @@ app.post('/getQuakesInDateRange', (req, res) => {
     let mag = req.body.mag;
     let fromDate = req.body.fromDate;
     let toDate = req.body.toDate;
-    let sqlQuery = `select * from data where mag<${mag} and VARCHAR_FORMAT(time,'YYYY-MM-DD') between '${fromDate}' and '${toDate}'`;
-    getResult(sqlQuery);
+    let sqlQuery = `select * from all_month where mag < ${mag} and CONVERT(varchar, time, 23)  between '${fromDate}' and '${toDate}'`;
+    getResult(sqlQuery, res);
 });
 
 // 4. Count By Magnitude. 
 app.post('/getQuakesCountByMagnitude', (req, res) => {
-    let dat = req.body.Day;
-    let sqlQuery = `SELECT count(RANGE) as COUNT, range FROM  (select t.*, (case when t.mag between 0 and 1  then '0-1' when t.mag between 1 and 2 then '1-2' when t.mag between 2 and 3 then '2-3' when t.mag between 3 and 4 then '3-4' when t.mag between 4 and 5 then '4-5' when t.mag between 5 and 6 then '5-6' when t.mag between 6 and 7 then '6-7'  end) as range from MCP95677.NEWEARTH t where VARCHAR_FORMAT(time,'YYYY-MM-DD') >VARCHAR_FORMAT(sysdate-${dat},'YYYY-MM-DD')) group by range;`;
-    getResult(sqlQuery);
+    let days = req.body.days;
+    let sqlQuery = `SELECT count(RANGE) as COUNT, range FROM 
+    (select t.*, (
+        case when t.mag between 0 and 1  then '0-1' 
+            when t.mag between 1 and 2 then '1-2' 
+            when t.mag between 2 and 3 then '2-3' 
+            when t.mag between 3 and 4 then '3-4' 
+            when t.mag between 4 and 5 then '4-5' 
+            when t.mag between 5 and 6 then '5-6' 
+            when t.mag between 6 and 7 then '6-7'  end) as range 
+    from all_month t where CONVERT(varchar, time, 23) > CONVERT(varchar, sysdate-${days}, 23))`;
+    getResult(sqlQuery, res);
 });
 
 // 5. Get Quakes within the date range and Magnitude. 
@@ -68,10 +77,10 @@ app.post('/getQuakesInDateRange', (req, res) => {
     radians(${loc_lon2}))+ 
     sin(radians(${loc_lat2}))*
     sin(radians(l2.latitude)))) < ${range};`;
-    getResult(sqlQuery);
+    getResult(sqlQuery, res);
 });
 
-function getResult(sqlQuery) {
+function getResult(sqlQuery, res) {
     const request = new Request(sqlQuery,
         (err, rowCount) => {
         if (err) {
