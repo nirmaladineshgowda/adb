@@ -9,9 +9,9 @@ const config = {
     },
     type: "default"
   },
-  server: "adb2.database.windows.net",
+  server: "adbquiz3.database.windows.net",
   options: {
-    database: "adbdemo2",
+    database: "adbquiz3",
     encrypt: true
   }
 };

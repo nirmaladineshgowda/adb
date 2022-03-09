@@ -1,5 +1,5 @@
 {
-  "name": "adb2",
+  "name": "adbquiz",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,18 +8,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/manojranga619/ADB2.git"
+    "url": "git+https://github.com/manojranga619/ADBQuiz.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/manojranga619/ADB2/issues"
+    "url": "https://github.com/manojranga619/ADBQuiz/issues"
   },
-  "homepage": "https://github.com/manojranga619/ADB2#readme",
+  "homepage": "https://github.com/manojranga619/ADBQuiz#readme",
   "dependencies": {
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.17.2",
-    "tedious": "^14.3.0"
+    "hashlib": "^1.0.1",
+    "redis": "^4.0.4",
+    "tedious": "^14.3.0",
+    "tedious-async": "^1.0.9"
   }
 }

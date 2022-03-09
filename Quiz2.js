@@ -1,5 +1,5 @@
-let baseAddress = 'https://adbquiz2.azurewebsites.net/'; // 'http://localhost:3000/';
-// let baseAddress = 'http://localhost:3000/';
+// let baseAddress = 'https://adbquiz2.azurewebsites.net/'; // 'http://localhost:3000/';
+let baseAddress = 'http://localhost:3000/';
 
 function getQuakesByMagRange() {
     let magRange1 = document.getElementById("magRange1").value;
