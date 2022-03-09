@@ -11,8 +11,8 @@ app.use(bodyparser.json());
 app.use(cors({ origin: '*' }));
 let startTime;
 // Connect to the Azure Cache for Redis over the TLS port using the key.
-let cacheHostName = "ADB3Cache.redis.cache.windows.net"; // process.env.REDISCACHEHOSTNAME;
-let cachePassword = "QSYcOioy2aSLSmSotxPnHxPWhEHkN2fi2AzCaIsFbL0="; // process.env.REDISCACHEKEY;
+let cacheHostName = "adbquiz3.redis.cache.windows.net"; // process.env.REDISCACHEHOSTNAME;
+let cachePassword = "MxX5leN8Z88XeldxZCZQyHYtGXJFtSTVBAzCaIGOsVI="; // process.env.REDISCACHEKEY;
 let cacheConnection = redis.createClient({
     // rediss for TLS
     url: "rediss://" + cacheHostName + ":6380",
