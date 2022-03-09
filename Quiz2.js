@@ -19,6 +19,24 @@ function getQuakesByMagRange() {
         });
 }
 
+function Sixb() {
+    let magRange1 = Number(document.getElementById("num").value);
+    let magRange2 = Number(document.getElementById("code").value);
+    
+    fetch(`${baseAddress}getIdsRange`)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            const time = data.time;
+            data = data.data.filter(x => x.n >=  x.code <= magRange2).slice(0, magRange1);
+            document.getElementById("time").innerText = time;
+            displayQuakes(data, time);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
 function displayQuakes(data) {
     document.getElementById("content").innerHTML = "";
     var mainContainer = document.getElementById("content");
