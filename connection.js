@@ -4,14 +4,14 @@ const { Connection, Request } = require("tedious");
 const config = {
   authentication: {
     options: {
-      userName: "Manoj123",
-      password: "Manoj@123"
+      userName: "nirmaladinesh",
+      password: "7411671120@Nir"
     },
     type: "default"
   },
-  server: "adbquiz3.database.windows.net",
+  server: "samplenir.database.windows.net",
   options: {
-    database: "adbquiz3",
+    database: "ndgdb",
     encrypt: true
   }
 };
@@ -24,34 +24,8 @@ connection.on("connect", err => {
   if (err) {
     console.error(err.message);
   } else {
-    // queryDatabase();
   }
 });
 
 connection.connect();
-
-function queryDatabase() {
-  console.log("Reading rows from the Table...");
-
-  // Read all rows from table
-  const request = new Request(
-    `SELECT TOP 20 Name
-     FROM [details]`,
-    (err, rowCount) => {
-      if (err) {
-        console.error(err.message);
-      } else {
-        console.log(`${rowCount} row(s) returned`);
-      }
-    }
-  );
-
-  request.on("row", columns => {
-    columns.forEach(column => {
-      console.log("%s\t%s", column.metadata.colName, column.value);
-    });
-  });
-
-  connection.execSql(request);
-}
 module.exports = connection;
