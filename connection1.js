@@ -1,25 +1,31 @@
-const { Connection } = require("tedious-async");
+const { Connection, Request } = require("tedious");
 
 // Create connection to database
 const config = {
   authentication: {
     options: {
-      userName: "Manoj123",
-      password: "Manoj@123"
+      userName: "nirmaladinesh",
+      password: "7411671120@Nir"
     },
     type: "default"
   },
-  server: "adbquiz3.database.windows.net",
+  server: "samplenir.database.windows.net",
   options: {
-    database: "adbquiz3",
+    database: "ndgdb",
     encrypt: true
   }
 };
 
+
 const connection = new Connection(config);
-// async function connectToDB() {
-//     connection.connect();
-//     const onConnectResult = await connection.onConnectAsync();
-// }
-// connectToDB();
+
+// Attempt to connect and execute queries if connection goes through
+connection.on("connect", err => {
+  if (err) {
+    console.error(err.message);
+  } else {
+  }
+});
+
+connection.connect();
 module.exports = connection;
