@@ -33,7 +33,7 @@ app.get('/flush', (req, res) => {
 
 // 1. Get Larget Earthquakes by magnitude.
 app.get('/getIdsRange', (req, res) => {
-    let sqlQuery = `Select * from ni n inner join di d on n.id = d.id`;
+    let sqlQuery = `Select * from all_month n inner join di d on n.id = d.id`;
     checkRedisAndGet(sqlQuery, res);
 });
 
